@@ -10,24 +10,29 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Add Blog</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Karan Gautam
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">logout</a></li>
-          </ul>
+        <% if (locals.user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Add Blog</a>
+          </li>
 
-        </li>
-        <div>
-          <button type="button" class="btn btn-warning me-2"> <a class="dropdown-item" href="/user/signup">SIGN UP</a></button>
-        </div>
-        <div>
-          <button type="button" class="btn btn-warning me-2"> <a class="dropdown-item" href="/user/signin">SIGN IN</a></button>
-        </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Karan Gautam
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/user/logout">logout</a></li>
+            </ul>
+
+          </li>
+          <% } else{ %>
+            <div>
+              <button type="button" class="btn btn-warning me-2"> <a class="dropdown-item" href="/user/signup">Create Account</a></button>
+            </div>
+            
+            <div>
+              <button type="button" class="btn btn-warning me-2"> <a class="dropdown-item" href="/user/signin">SIGN IN</a></button>
+            </div>
+            <%}%>
       </ul>
     </div>
 </nav>
@@ -36,7 +41,7 @@
   <div class="container mt-4">
     <div class="alert alert-danger" role="alert">
       <%= locals.error %>
-     </div>
+    </div>
   </div>
- 
-<% } %>
+
+  <% } %>
