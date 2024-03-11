@@ -26,9 +26,15 @@ router.post("/signup", async (req, res) => {
 // This is signin POST route that help to match there email and hashed password.
 router.post("/signin", async (req, res) => {
   const { email, Password } = req.body;
-  const user = await User.matchPassword(email, Password);
+  try {
+    const token = await User.matchPasswordAndGenrateToken(email, Password);
 
-  return res.redirect("/");
+    return res.cookie("token", token).redirect("/");
+  } catch (error) {
+    return res.render("signin", {
+      error: "Incurrect Email or Password",
+    });
+  }
 });
 
 module.exports = router;

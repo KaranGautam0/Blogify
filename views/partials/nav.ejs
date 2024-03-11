@@ -22,9 +22,21 @@
           </ul>
 
         </li>
+        <div>
+          <button type="button" class="btn btn-warning me-2"> <a class="dropdown-item" href="/user/signup">SIGN UP</a></button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-warning me-2"> <a class="dropdown-item" href="/user/signin">SIGN IN</a></button>
+        </div>
       </ul>
     </div>
-    <div>
-      <button type="button" class="btn btn-warning me-2"> <a class="dropdown-item" href="/user/signup">SIGN UP</a></button>
-    </div>
 </nav>
+
+<% if (locals.error) { %>
+  <div class="container mt-4">
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+     </div>
+  </div>
+ 
+<% } %>

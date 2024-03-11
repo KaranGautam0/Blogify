@@ -1,5 +1,5 @@
 const { createHmac, randomBytes } = require("crypto"); // this is inbuilt packages
-
+const {creteTokenForUser}= require("../services/authentication")
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
@@ -51,22 +51,26 @@ userSchema.pre("save", function (next) {
 });
 
 // To compare hashed password
-userSchema.static("matchPassword", async function (email, password) {
-  const user = await this.findOne({ email });
-  if (!user) throw new Error("User not Found!");
+userSchema.static(
+  "matchPasswordAndGenrateToken",
+  async function (email, password) {
+    const user = await this.findOne({ email });
+    if (!user) throw new Error("User not Found!");
 
-  const salt = user.salt;
+    const salt = user.salt;
 
-  const hashedPassword = user.Password;
-  const userProvidedhash = createHmac("sha256", salt)
-    .update(password)
-    .digest("hex");
+    const hashedPassword = user.Password;
+    const userProvidedhash = createHmac("sha256", salt)
+      .update(password)
+      .digest("hex");
 
-  if (hashedPassword !== userProvidedhash)
-    throw new Error("Incurrect Password");
+    if (hashedPassword !== userProvidedhash)
+      throw new Error("Incurrect Password");
 
-  return { ...user, password: undefined, salt: undefined };
-});
+    const token = creteTokenForUser(user);
+    return token;
+  }
+);
 
 const User = model("user", userSchema);
 module.exports = User;
