@@ -24,7 +24,7 @@ router.get("/add-new", (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const blog = await Blog.findById(req.params.id).populate("createdBy");
-  console.log("blog",blog);
+  // console.log("blog",blog);
   return res.render('blog', {
     user: req.user,
     blog,
