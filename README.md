@@ -1,5 +1,10 @@
 # Blogify Web App
 
+## DEMO LIVE 
+
+[***Click here***](https://blogify0.up.railway.app/) to visit the website.
+
+
 ![image](https://github.com/KaranGautam0/Blogify/assets/150542238/77314b8d-7205-436b-9896-36b031b2b446)
 
 
